@@ -19,6 +19,9 @@ public class User {
 
     private String password;
 
+    @TableField("class_id")
+    private Integer classId;
+
     @TableField("created_at")
     private Date createdAt;
 

@@ -8,4 +8,5 @@ public class UserUpdateRequest {
     private String username;
     private String email;
     private String password;  // 可选，如果为空则不修改密码
+    private Integer classId;
 } 

@@ -18,5 +18,6 @@ public class UserPageResponse {
         private String email;
         private String createdAt;
         private String updatedAt;
+        private Integer classId;
     }
 } 

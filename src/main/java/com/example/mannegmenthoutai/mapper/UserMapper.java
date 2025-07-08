@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 import com.example.mannegmenthoutai.dto.UserQueryRequest;
 import com.example.mannegmenthoutai.dto.UserPageResponse;
+import java.util.Map;
 
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
@@ -25,8 +26,10 @@ public interface UserMapper extends BaseMapper<User> {
     @Select("SELECT COUNT(*) FROM users WHERE email = #{email}")
     int countByEmail(@Param("email") String email);
 
-    @Insert("INSERT INTO users(username, password, email) VALUES(#{username}, #{password}, #{email})"  )
+    @Insert("INSERT INTO users(username, password, email, class_id) VALUES(#{username}, #{password}, #{email}, #{classId})")
     int insertUser(User user);
 
+    @Select("SELECT class_id, COUNT(*) as count FROM users WHERE class_id IS NOT NULL GROUP BY class_id")
+    List<Map<String, Object>> countUsersByClassId();
 
 } 

@@ -111,6 +111,7 @@ public class UserService {
         userInfo.setUserId(user.getUserId());
         userInfo.setUsername(user.getUsername());
         userInfo.setEmail(user.getEmail());
+        userInfo.setClassId(user.getClassId());
         
         // 设置响应
         response.setSuccess(true);
@@ -127,7 +128,7 @@ public class UserService {
         
         // 创建查询条件 - 只查询需要的字段，按创建时间倒序
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("user_id", "username", "email", "created_at", "updated_at");
+        queryWrapper.select("user_id", "username", "email", "created_at", "updated_at", "class_id");
         
         // 添加搜索条件（如果有的话）
         // if (StringUtils.hasText(request.getUsername())) {
@@ -183,6 +184,9 @@ public class UserService {
             String encryptedPassword = passwordEncoder.encode(request.getPassword());
             existingUser.setPassword(encryptedPassword);
         }
+        if (request.getClassId() != null) {
+            existingUser.setClassId(request.getClassId());
+        }
         
         // 设置更新时间
         existingUser.setUpdatedAt(new Date());
@@ -212,6 +216,7 @@ public class UserService {
         userInfo.setUserId(user.getUserId());
         userInfo.setUsername(user.getUsername());
         userInfo.setEmail(user.getEmail());
+        userInfo.setClassId(user.getClassId());
         
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         if (user.getCreatedAt() != null) {
